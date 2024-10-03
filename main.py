@@ -1,19 +1,18 @@
 import random
+
 def motAleatoire():
-    mots = ["Montagne", "Étoile", "Voyage", "Chocolat", "Océan", 
-        "Aventure", "Musique", "Nuage", "Sourire", "Lumière"]
-    return mots[random.randint(0,9)].lower()
- 
+    mot = ["Montagne", "Étoile", "Voyage", "Chocolat", "Océan", 
+           "Aventure", "Musique", "Nuage", "Sourire", "Lumière"]
+    return mot[random.randint(0, len(mot) - 1)].lower()
+
 mot = motAleatoire().lower()
 array_lettre = []
 mot_cacher = '* ' * len(mot)
 tentative = 9
-print(mot)
-print(mot_cacher)
-print(mot.count("*"))   
-def info(mot,mot_cacher):
-    print("la longueur du mot est "+str(len(mot)))
-    print("il reste autant de mots à trouver "+str(mot_cacher.count("*")))
+
+def info(mot, mot_cacher):
+    print("La longueur du mot est " + str(len(mot)))
+    print("Il reste " + str(mot_cacher.count("*")) + " lettres à trouver.")
 
 def searchArrayList(lettre, array_lettre):
     if lettre in array_lettre:
@@ -36,6 +35,10 @@ def demander_lettre(array_lettre, mot_cacher, tentative):
                         tentative -= 1  # Réduire les tentatives seulement si la lettre est incorrecte
                     print("Mot caché: " + mot_cacher)
                     print(f"Il te reste {tentative} tentatives.")
+                    
+                    # Appel de la méthode info ici
+                    info(mot, mot_cacher)
+
                 else:
                     print("Tu as déjà deviné cette lettre.")
             else:
@@ -63,10 +66,8 @@ def play(mot, mot_cacher, lettre):
         print("Lettre non trouvée.")
         return mot_cacher
 
+def game(array_lettre, mot_cacher, tentative):
+    info(mot, mot_cacher)
+    demander_lettre(array_lettre, mot_cacher, tentative)
 
-def game(array_lettre,mot_cacher,tentative):
-    info(mot,mot_cacher)
-    demander_lettre(array_lettre,mot_cacher,tentative)
-
-
-game(array_lettre,mot_cacher,tentative)
+game(array_lettre, mot_cacher, tentative)
